@@ -128,14 +128,23 @@
 			break;
 	}
 	
-	
-	[GrowlApplicationBridge notifyWithTitle:title
-								description:desc
-						   notificationName:kind
-								   iconData:nil
-								   priority:priority
-								   isSticky:sticky
-							   clickContext:context];
+    
+    if (NSClassFromString(@"NSUserNotification")) {
+        NSUserNotification *notification = [NSUserNotification new];
+        notification.title = title;
+        notification.informativeText = desc;
+        [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+        [notification release];
+    }
+	else {
+        [GrowlApplicationBridge notifyWithTitle:title
+                                    description:desc
+                               notificationName:kind
+                                       iconData:nil
+                                       priority:priority
+                                       isSticky:sticky
+                                   clickContext:context];
+    }
 }
 
 - (NSDictionary*)registrationDictionaryForGrowl
