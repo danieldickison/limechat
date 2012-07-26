@@ -34,6 +34,9 @@
 	self = [super init];
 	if (self) {
 		[GrowlApplicationBridge setGrowlDelegate:self];
+        if (NSClassFromString(@"NSUserNotification")) {
+            [NSUserNotificationCenter defaultUserNotificationCenter].delegate = self;
+        }
 	}
 	return self;
 }
@@ -133,6 +136,8 @@
         NSUserNotification *notification = [NSUserNotification new];
         notification.title = title;
         notification.informativeText = desc;
+        notification.soundName = NSUserNotificationDefaultSoundName;
+        notification.userInfo = @{@"context": context};
         [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
         [notification release];
     }
@@ -207,6 +212,11 @@
 			}
 		}
 	}
+}
+
+- (void)userNotificationCenter:(NSUserNotificationCenter *)center didActivateNotification:(NSUserNotification *)notification {
+    [self growlNotificationWasClicked:notification.userInfo[@"context"]];
+    [center removeDeliveredNotification:notification];
 }
 
 @end

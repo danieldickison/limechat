@@ -28,7 +28,7 @@ typedef enum {
 } GrowlNotificationType;
 
 
-@interface GrowlController : NSObject <GrowlApplicationBridgeDelegate>
+@interface GrowlController : NSObject <GrowlApplicationBridgeDelegate, NSUserNotificationCenterDelegate>
 {
 	IRCWorld* owner;
 	id lastClickedContext;
