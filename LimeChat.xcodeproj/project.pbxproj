@@ -1813,7 +1813,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = LimeChat;
-				SDKROOT = macosx10.6;
+				SDKROOT = macosx;
 				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Debug;
@@ -1847,7 +1847,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = LimeChat;
-				SDKROOT = macosx10.6;
+				SDKROOT = macosx;
 				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Release;
