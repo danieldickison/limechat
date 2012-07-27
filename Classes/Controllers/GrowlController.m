@@ -136,7 +136,6 @@
         NSUserNotification *notification = [NSUserNotification new];
         notification.title = title;
         notification.informativeText = desc;
-        notification.soundName = NSUserNotificationDefaultSoundName;
         notification.userInfo = @{@"context": context};
         [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
         [notification release];
