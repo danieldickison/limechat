@@ -108,6 +108,8 @@ typedef enum {
 + (void)setGrowlEnabled:(BOOL)value forEvent:(GrowlNotificationType)event;
 + (BOOL)growlStickyForEvent:(GrowlNotificationType)event;
 + (void)setGrowlSticky:(BOOL)value forEvent:(GrowlNotificationType)event;
++ (BOOL)useGrowl;
++ (BOOL)notificationCenterAvailable;
 
 + (BOOL)spellCheckEnabled;
 + (void)setSpellCheckEnabled:(BOOL)value;

@@ -131,16 +131,7 @@
 			break;
 	}
 	
-    
-    if (NSClassFromString(@"NSUserNotification")) {
-        NSUserNotification *notification = [NSUserNotification new];
-        notification.title = title;
-        notification.informativeText = desc;
-        notification.userInfo = @{@"context": context};
-        [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
-        [notification release];
-    }
-	else {
+    if ([Preferences useGrowl]) {
         [GrowlApplicationBridge notifyWithTitle:title
                                     description:desc
                                notificationName:kind
@@ -148,6 +139,14 @@
                                        priority:priority
                                        isSticky:sticky
                                    clickContext:context];
+    }
+    else if ([Preferences notificationCenterAvailable]) {
+        NSUserNotification *notification = [NSUserNotification new];
+        notification.title = title;
+        notification.informativeText = desc;
+        notification.userInfo = @{@"context": context};
+        [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+        [notification release];
     }
 }
 

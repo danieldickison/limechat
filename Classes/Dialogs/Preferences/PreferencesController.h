@@ -16,6 +16,8 @@
     
     IBOutlet NSTableView* keywordsTable;
     IBOutlet NSTableView* excludeWordsTable;
+    IBOutlet NSTableView *eventsTable;
+    IBOutlet NSButtonCell *notificationCenterButtonCell;
     IBOutlet NSArrayController* keywordsArrayController;
     IBOutlet NSArrayController* excludeWordsArrayController;
     IBOutlet NSPopUpButton* transcriptFolderButton;
@@ -49,6 +51,7 @@
 - (void)onInputSelectFont:(id)sender;
 - (void)onOverrideFontChanged:(id)sender;
 - (void)onChangedTransparency:(id)sender;
+- (IBAction)onUseGrowlChanged:(id)sender;
 
 @end
 

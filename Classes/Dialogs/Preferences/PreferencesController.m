@@ -30,6 +30,8 @@
     self = [super init];
     if (self) {
         [NSBundle loadNibNamed:@"Preferences" owner:self];
+        [notificationCenterButtonCell setEnabled:[Preferences notificationCenterAvailable]];
+        [self onUseGrowlChanged:nil];
     }
     return self;
 }
@@ -500,6 +502,15 @@
 {
     NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
     [nc postNotificationName:ThemeDidChangeNotification object:nil userInfo:nil];
+}
+
+- (void)onUseGrowlChanged:(id)sender
+{
+    BOOL useGrowl = [Preferences useGrowl];
+    NSTableColumn *notifColumn = [eventsTable tableColumnWithIdentifier:@"notification"];
+    NSTableColumn *stickyColumn = [eventsTable tableColumnWithIdentifier:@"sticky"];
+    [[notifColumn headerCell] setStringValue:useGrowl ? @"Growl" : @"Notification"];
+    [stickyColumn setHidden:!useGrowl];
 }
 
 #pragma mark -
